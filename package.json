@@ -1,0 +1,32 @@
+{
+  "name": "arrow-mocha",
+  "version": "0.9.0",
+  "description": "Provides your ES6 arrow functions with Mocha test context",
+  "author": "Sam Kozin <sam.kozin@gmail.com>",
+  "scripts": {
+    "test": "mocha -C --harmony --require ./test/_hook/babel.js ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skozin/arrow-mocha.git"
+  },
+  "keywords": [
+    "mocha",
+    "arrow function",
+    "arrow",
+    "es6"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skozin/arrow-mocha/issues"
+  },
+  "homepage": "https://github.com/skozin/arrow-mocha",
+  "devDependencies": {
+    "babel": "^4.7.9",
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
+  },
+  "files": [
+    "index.js"
+  ]
+}
