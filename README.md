@@ -90,6 +90,6 @@ describe('The functions imported on the previous line decorate the corresponding
 })
 ```
 
-## Licence
+## License
 
 MIT
