@@ -29,6 +29,9 @@ itWithCtx.skip = (desc, fn) => it.skip(desc, fn)
 
 const withTestCtx = (fn) =>
 {
+  if ('function' !== typeof fn) {
+    return fn
+  }
   const decoratedFn = (fn.length == 2
     ? function(cb){ return fn(this, cb) }
     : function  (){ return fn(this)     }

@@ -1,6 +1,6 @@
 {
   "name": "arrow-mocha",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Provides your ES6 arrow functions with Mocha test context",
   "author": "Sam Kozin <sam.kozin@gmail.com>",
   "scripts": {
