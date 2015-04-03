@@ -9,9 +9,8 @@ import { assert } from 'chai'
 import { it, before, after, beforeEach, afterEach } from '../'
 
 
-describe('The functions imported on the previous line decorate the corresp. Mocha functions', () =>
+describe('The functions imported on the previous line decorate the corresponding Mocha functions', () =>
 {
-
   describe('so that the Mocha test context gets passed to the first argument', () => {
     before(t => {
       t.some = 'value'
@@ -21,16 +20,16 @@ describe('The functions imported on the previous line decorate the corresp. Moch
 
 
   describe('this works for async tests too:', () => {
-    const delay = (ms) => new Promise(resolve => {
-      setTimeout(resolve, ms)
+    const delay = (ms, value) => new Promise(resolve => {
+      setTimeout(resolve, ms, value)
     })
     before(t => {
-      return delay(10).then(() => {
-        t.another = 'value'
+      return delay(10, 'value').then(v => {
+        t.another = v
       })
     })
-    describe('when a test/hook returns a Promise, just declare the first argument', () => {
-      it('and the context will be passed to this arg', t => delay(10).then(() => {
+    describe('when a test/hook returns a Promise', () => {
+      it('the context is passed to the first argument', t => delay(10).then(() => {
         assert.equal(t.another, 'value')
       }))
     })
@@ -43,13 +42,13 @@ describe('The functions imported on the previous line decorate the corresp. Moch
     }
     before((t, done) => {
       return delay(10, () => {
-        t.another = 'value'
+        t.third = 'value'
         done()
       })
     })
-    describe('declare it as a second argument;', () => {
+    describe('declare it as the second argument;', () => {
       it('the context will be passed to the first arg', (t, done) => delay(10, () => {
-        assert.equal(t.another, 'value')
+        assert.equal(t.third, 'value')
         done()
       }))
     })
