@@ -1,10 +1,11 @@
 {
   "name": "arrow-mocha",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides your ES6 arrow functions with Mocha test context",
   "author": "Sam Kozin <sam.kozin@gmail.com>",
   "scripts": {
-    "test": "mocha -C --harmony --require ./test/_hook/babel.js ./test"
+    "test": "mocha -C --harmony --require ./test/_hook/babel.js ./test",
+    "prepublish": "mkdir -p es5 && babel index.js > es5/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "mocha": "^2.2.1"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "es5/index.js"
   ]
 }
