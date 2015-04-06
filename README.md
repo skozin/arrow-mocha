@@ -19,7 +19,7 @@ This will not work for arrow functions:
 it('some test', () => console.log('myObj is:', this.myObj)) // undefined, `this` points to the global object
 ```
 
-This little library provides a set of patched Mocha functions (`it`,
+This little library provides a set of decorated Mocha functions (`it`,
 `before`, `after`, `beforeEach` and `afterEach`) that pass the context
 as the first argument to your arrows:
 
@@ -33,6 +33,60 @@ it('some test', t => console.log('myObj is:', t.myObj)) // MyAwesomeThing {}
 This is done by wrapping each arrow into the usual function, obtaining the
 context through `this` and passing it to the first argument of the arrow.
 
+## Installation and usage
+
+```bash
+npm install --save-dev arrow-mocha
+```
+
+In a file with tests, ES6 syntax:
+
+```js
+import { it, before, after, beforeEach, afterEach } from 'arrow-mocha'
+```
+
+CommonJS syntax:
+
+```js
+var arrowMocha = require('arrow-mocha'),
+    it = arrowMocha.it,
+    before = arrowMocha.before,
+    /// etc.
+```
+
+If you use [Babel](http://babeljs.io) for transpiling your tests, you may have
+difficulties using this module, because, by default, Babel doesn't transpile
+files residing inside the `node_modules` directory. For this case, ES5 version
+([generated with that same tool](https://github.com/skozin/arrow-mocha/blob/master/package.json#L8))
+is provided too. Just replace `arrow-mocha` with `arrow-mocha/es5`:
+
+```js
+import { it, before, after, beforeEach, afterEach } from 'arrow-mocha/es5'
+```
+
+The same applies to CommonJS syntax. Another option is to configure Babel
+to not ignore this module. For example:
+
+package.json
+
+```js
+//...
+  "scripts": {
+    "test": "mocha --harmony --require ./test/helpers/babel-hook.js ./test"
+  }
+//...
+```
+
+test/helpers/babel-hook.js
+
+```js
+require('babel/register')({
+  ignore: /node_modules(?![/]arrow-mocha)/
+  // or ignore: false to transpile all NPM modules
+})
+```
+
+
 ## Example
 
 ```js
@@ -43,7 +97,8 @@ context through `this` and passing it to the first argument of the arrow.
 // import { it, before, after, beforeEach, afterEach } from 'arrow-mocha'
 
 
-describe('The functions imported on the previous line decorate the corresponding Mocha functions', () =>
+describe('The functions imported on the previous line decorate the corresponding '
++        'Mocha functions', () =>
 {
   describe('so that the Mocha test context gets passed to the first argument', () => {
     before(t => {
