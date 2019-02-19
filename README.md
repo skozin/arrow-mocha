@@ -92,9 +92,7 @@ require('babel/register')({
 ```js
 
 // This line is important, otherwise the magic will not work!
-// Is is commented because it breaks GitHub syntax highlighting.
-//
-// import { it, before, after, beforeEach, afterEach } from 'arrow-mocha'
+import { it, before, after, beforeEach, afterEach } from 'arrow-mocha'
 
 
 describe('The functions imported on the previous line decorate the corresponding '
